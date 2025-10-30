@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using _Core.Views;
 using _Core.Views.Components;
-using _UI.Dialogs.Views;
+using _Main._UI.Dialogs.Views;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
