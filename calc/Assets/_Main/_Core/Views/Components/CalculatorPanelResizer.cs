@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Core.Views.Components
+namespace _Main._Core.Views.Components
 {
     public class CalculatorPanelResizer : MonoBehaviour
     {
@@ -50,7 +50,7 @@ namespace _Core.Views.Components
 
         public void OnContentChanged()
         {
-            Debug.Log($"CalculatorPanelResizer : OnContentChanged");
+            Debug.Log("CalculatorPanelResizer : OnContentChanged");
             UpdateViewHeight();
         }
 
@@ -100,26 +100,37 @@ namespace _Core.Views.Components
         private float CalculatePanelHeight()
         {
             var historyHeight = CalculateContentHeight();
-            // Add other heights (input, button ...)
-
-
-            var emptyBtnHeight = 0F;
-            if(emptySpaceBtn.gameObject.activeSelf)
-            {
-                emptyBtnHeight = emptySpaceBtn.rect.height;
-            }
+            var emptyBtnHeight = GetEmptyBtnHeight();
+            
+            // Total = history + additionalOffset + emptyBtn, but clamped to maxHeight
             var totalContentHeight = historyHeight + additionalHeightOffset + emptyBtnHeight;
-            
-            
             var desiredHeightClamped = Mathf.Clamp(totalContentHeight, minHeight, maxHeight);
+            
+            Debug.Log($"CalculatorPanelResizer : CalculatePanelHeight : historyHeight={historyHeight}, emptyBtnHeight={emptyBtnHeight}, additionalOffset={additionalHeightOffset}, total={totalContentHeight}, clamped={desiredHeightClamped}");
             return desiredHeightClamped;
         }
 
         private float CalculateScrollViewHeight()
         {
             var historyHeight = CalculateContentHeight();
-            var desiredScrollViewHeight = Mathf.Min(historyHeight, maxHeight - additionalHeightOffset);
-            return desiredScrollViewHeight;
+            var emptyBtnHeight = GetEmptyBtnHeight();
+            
+            // Calculate how much space is available for ScrollView when panel is at maxHeight
+            var maxAvailableForScroll = maxHeight - additionalHeightOffset - emptyBtnHeight;
+            
+            // If history fits within available space, use full history height
+            // Otherwise, limit ScrollView to available space
+            var scrollViewHeight = Mathf.Min(historyHeight, maxAvailableForScroll);
+            
+            Debug.Log($"CalculatorPanelResizer : CalculateScrollViewHeight : historyHeight={historyHeight}, maxAvailable={maxAvailableForScroll}, result={scrollViewHeight}");
+            return scrollViewHeight;
+        }
+
+        private float GetEmptyBtnHeight()
+        {
+            if (emptySpaceBtn == null) return 0f;
+            if (!emptySpaceBtn.gameObject.activeSelf) return 0f;
+            return emptySpaceBtn.rect.height;
         }
 
         private float CalculateContentHeight()

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using _Core.Views;
 using _Main._Core.Model;
 using _Main._Core.Views;
 using UnityEngine;
