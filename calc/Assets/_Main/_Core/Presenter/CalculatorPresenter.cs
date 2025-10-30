@@ -37,7 +37,8 @@ namespace _Main._Core.Presenter
             Debug.Log($"CalculatorPresenter : OnCalculateClicked : _lastExpression = {_lastExpression}");
             if (string.IsNullOrEmpty(_lastExpression))
             {
-                ShowError();
+                //ShowError();
+                Debug.Log($"CalculatorPresenter : OnCalculateClicked : _lastExpression is empty, Ignoring");
                 return;
             }
 
