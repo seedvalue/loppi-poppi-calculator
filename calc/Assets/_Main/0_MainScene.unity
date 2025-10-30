@@ -285,7 +285,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 2
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -1683,11 +1683,12 @@ MonoBehaviour:
   calculatorViewLayoutElement: {fileID: 794444315}
   calculatorViewSizeFitter: {fileID: 794444316}
   historyContent: {fileID: 5317193}
+  emptySpaceBtn: {fileID: 1303035311}
   scrollView: {fileID: 1826025340}
   scrollViewRect: {fileID: 1826025339}
   maxHeight: 666
   minHeight: 320
-  additionalHeightOffset: 370
+  additionalHeightOffset: 320
 --- !u!114 &794444315
 MonoBehaviour:
   m_ObjectHideFlags: 0
